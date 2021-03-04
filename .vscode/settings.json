@@ -60,7 +60,9 @@
       "**/*.out": true,  //设置为true就会隐藏.out文件
     },
     "files.associations": {
-      "__nullptr": "cpp"
+      "__nullptr": "cpp",
+      "algorithm": "cpp",
+      "iostream": "cpp"
     }
     // --------------------------------------------------------------------------------------
   }
