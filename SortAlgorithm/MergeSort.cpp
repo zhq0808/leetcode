@@ -76,22 +76,21 @@ int main(){
             //复制随机数组,用于系统自带算法排序
             vector<int> systemSortArr = logrithm.copyArr(originArr);
             //printArr(newArr1,size);
-            int *newArr2 = logrithm.copyArr(originArr, arrSize);
+            vector<int> newArr2 = logrithm.copyArr(originArr);
             //因为是用new进行数组的初始化，因此需要delete掉
-            delete originArr;
             //使用系统自带算法
-            sort(systemSortArr, systemSortArr + arrSize);
-            int *sortResult = mergeSort(selfSortArr, arrSize);
+            sort(systemSortArr.begin(), systemSortArr.end());
+            vector<int> sortResult = mergeSort(selfSortArr);
             //比较数组
-            if (!logrithm.compareTwoArr(sortResult, systemSortArr, arrSize))
+            if (!logrithm.compArr(sortResult, systemSortArr))
             {
                 cout << "------------err-----------" << endl;
                 cout << "原数组：" << endl;
-                logrithm.printArr(newArr2, arrSize);
+                logrithm.printArr(newArr2);
                 cout << "正确结果：" << endl;
-                logrithm.printArr(systemSortArr, arrSize);
+                logrithm.printArr(systemSortArr);
                 cout << "排序算法结果：" << endl;
-                logrithm.printArr(sortResult, arrSize);
+                logrithm.printArr(sortResult);
                 cout << "------------err-----------" << endl;
                 break; //如果结果不对，则跳出循环，结束测试
             }
@@ -99,11 +98,11 @@ int main(){
             {
                 cout << "------------nice-----------" << endl;
                 cout << "原数组：" << endl;
-                logrithm.printArr(newArr2, arrSize);
+                logrithm.printArr(newArr2);
                 cout << "排序算法结果：" << endl;
-                logrithm.printArr(sortResult, arrSize);
+                logrithm.printArr(sortResult);
                 cout << "正确结果：" << endl;
-                logrithm.printArr(systemSortArr, arrSize);
+                logrithm.printArr(systemSortArr);
                 cout << "------------nice-----------" << endl;
             }
         }
