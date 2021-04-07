@@ -22,14 +22,14 @@ void merge(vector<int> &arr, int left, int mid, int right){
     int rightIndex = mid + 1; //右边数组的下标
     while (leftIndex <= mid && rightIndex <= right) //不是||，而是&&
     {
-        if(arr[leftIndex] < arr[rightIndex]){
+        if(arr[leftIndex] <= arr[rightIndex]){
             arrTemp.push_back(arr[leftIndex]);
             leftIndex++;
         }
         if(arr[leftIndex] > arr[rightIndex]){
             arrTemp.push_back(arr[rightIndex]);
-        }   rightIndex++;
-
+           rightIndex++;
+        }
     }
     //两个必有且只有一个
     while(leftIndex <= mid){
@@ -40,8 +40,8 @@ void merge(vector<int> &arr, int left, int mid, int right){
         arrTemp.push_back(arr[rightIndex]);
         rightIndex++;
     }
-    for(int i = left; i++; i <= right){
-        arr[i] = arrTemp[i];
+    for(int i = 0; i < arrTemp.size(); i++){ //注意赋值的时候，arrTemp是从0开始，而不是left开始
+        arr[left+i] = arrTemp[i];
     }
 }
 //归并排序，主要是：子问题怎么合并
@@ -49,7 +49,7 @@ void sortProcess(vector<int> &arr, int left, int right){
     if(left == right){
         return ;
     }
-    int mid = left + (right - left); //错了，应该是(right + left) / 2
+    int mid = left + (right - left)/2; //错了，应该是(right + left) / 2
     sortProcess(arr, left, mid); //先排左边  T(N/2)
     sortProcess(arr, mid + 1, right); //再排右边  T(N/2)
     merge(arr, left, mid, right); //O(N)
@@ -64,6 +64,7 @@ vector<int> mergeSort(vector<int> arr){
 }
 int main(){
     int testTimes;
+    cout<<"请输入比较次数"<<endl;
     cin>>testTimes;
     while (testTimes--)
         {
@@ -80,7 +81,9 @@ int main(){
             //因为是用new进行数组的初始化，因此需要delete掉
             //使用系统自带算法
             sort(systemSortArr.begin(), systemSortArr.end());
+            logrithm.printArr(systemSortArr);
             vector<int> sortResult = mergeSort(selfSortArr);
+            logrithm.printArr(sortResult);
             //比较数组
             if (!logrithm.compArr(sortResult, systemSortArr))
             {
